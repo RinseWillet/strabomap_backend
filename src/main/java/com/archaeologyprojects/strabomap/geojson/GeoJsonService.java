@@ -122,7 +122,6 @@ public class GeoJsonService {
         feature.put("properties", properties);
         feature.put("geometry", geometry);
 
-        System.out.println(geometry);
         //return completed feature
         return feature;
     }
