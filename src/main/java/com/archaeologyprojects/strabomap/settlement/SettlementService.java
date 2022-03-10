@@ -1,6 +1,7 @@
 package com.archaeologyprojects.strabomap.settlement;
 
 //Spring
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 //Logging
@@ -8,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //Java
-import java.util.Optional;
+
+import com.archaeologyprojects.strabomap.geojson.GeoJsonService;
 
 @Service
 public class SettlementService {
@@ -31,6 +33,14 @@ public class SettlementService {
         return settlementRepository.findAll();
     }
 
+    public JSONObject findAllGeoJson() {
+
+        //create GeoJsonBuilderService object to convert incoming Iterable to GeoJson
+        GeoJsonService geoJsonBuilderService = new GeoJsonService();
+
+        return geoJsonBuilderService.convert(findAll());
+    }
+
     public Iterable<Settlement> findByProvince(String province){
 
         // logging info finding by id
@@ -39,4 +49,12 @@ public class SettlementService {
         return settlementRepository.findByProvince(province);
     }
 
+    public JSONObject findByProvinceGeoJson(String province){
+
+        //create GeoJsonBuilderService object to convert incoming Iterable to GeoJson
+        GeoJsonService geoJsonBuilderService = new GeoJsonService();
+
+        //creating GeoJSONObject from Iterable from repository
+        return geoJsonBuilderService.convert(settlementRepository.findByProvince(province));
+    }
 }

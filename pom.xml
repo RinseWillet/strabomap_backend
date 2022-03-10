@@ -68,8 +68,14 @@
 			<artifactId>jackson-datatype-jts</artifactId>
 			<version>1.2.10</version>
 		</dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20211205</version>
+            <scope>compile</scope>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>
