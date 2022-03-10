@@ -11,5 +11,4 @@ public class StrabomapApplication {
 		SpringApplication.run(StrabomapApplication.class, args);
 		System.out.println("StraboMap App Backend is running");
 	}
-
 }
