@@ -1,16 +1,23 @@
 package com.archaeologyprojects.strabomap.settlement;
 
 //Spring
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+// JTS Topology Suite
+import org.locationtech.jts.geom.Point;
+
 //Logging
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
+
+//JSON
+import org.json.JSONObject;
 
 //Java
+import java.util.ArrayList;
 
+//Package components
 import com.archaeologyprojects.strabomap.geojson.GeoJsonService;
+
 
 @Service
 public class SettlementService {
@@ -25,7 +32,7 @@ public class SettlementService {
         this.settlementRepository = settlementRepository;
     }
 
-    public Iterable<Settlement> findAll(){
+    public Iterable<Settlement> findAll() {
 
         //logging finding all settlements
         logger.info("Finding all settlements");
@@ -33,28 +40,36 @@ public class SettlementService {
         return settlementRepository.findAll();
     }
 
+
     public JSONObject findAllGeoJson() {
 
         //create GeoJsonBuilderService object to convert incoming Iterable to GeoJson
-        GeoJsonService geoJsonBuilderService = new GeoJsonService();
+        GeoJsonService geoJsonService = new GeoJsonService();
 
-        return geoJsonBuilderService.convert(findAll());
+        return geoJsonService.convert(findAll());
     }
 
-    public Iterable<Settlement> findByProvince(String province){
 
+    public ArrayList<SettlementMapDTO> overviewMapping() {
+        ArrayList<SettlementMapDTO> settlementMapDTOArrayList = new ArrayList<>();
+
+        Iterable<Settlement> settlementIterable = findAll();
+
+        for (Settlement settlement : settlementIterable) {
+            SettlementMapDTO settlementMapDTO = convertSettlement(settlement);
+            settlementMapDTOArrayList.add(settlementMapDTO);
+        }
         // logging info finding by id
-        logger.info("Trying to find settlement {}", province);
+        logger.info("mapping settlements");
 
-        return settlementRepository.findByProvince(province);
+        return settlementMapDTOArrayList;
     }
 
-    public JSONObject findByProvinceGeoJson(String province){
+    private SettlementMapDTO convertSettlement(Settlement settlement) {
+        long id = settlement.getId();
+        String name = settlement.getAncientName();
+        Point geom = settlement.getGeom();
 
-        //create GeoJsonBuilderService object to convert incoming Iterable to GeoJson
-        GeoJsonService geoJsonBuilderService = new GeoJsonService();
-
-        //creating GeoJSONObject from Iterable from repository
-        return geoJsonBuilderService.convert(settlementRepository.findByProvince(province));
+        return new SettlementMapDTO(id, name, geom);
     }
 }

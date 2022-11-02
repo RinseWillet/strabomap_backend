@@ -9,71 +9,38 @@ import org.locationtech.jts.geom.Point;
 //Java
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+//Package components
+import com.archaeologyprojects.strabomap.ancientreference.AncientReference;
+import com.archaeologyprojects.strabomap.modernreference.ModernReference;
 
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@Table(name = "settlement_asia_minor")
-public class Settlement implements Serializable {
+@Table(name = "settlement")
+public class Settlement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="pleiades_i")
     private Integer pleiadesId;
 
-    @Column(name="name")
-    private String name;
+    private String ancientName;
 
-    @Column(name = "geom")
+    private String modernName;
+
     private Point geom;
 
-    // province during 2nd c. CE
-    @Column(name = "province")
-    private String province;
-
-    //to which Assize district a city belonged
-    @Column(name = "conventu_1")
-    private String conventus;
-
-    //reference in Pliny's Natural History
-    @Column(name = "plin_list")
-    private String plinyList;
-
-    //reference in Strabo's Geography
-    @Column(name = "strab_list")
-    private String straboList;
-
-    //reference in Ptolemy's Geography
-    @Column(name = "ptol_list")
-    private String ptolemyList;
-
-    //field of reference to the Other Episcopal major relevant lists (Jones 1971, app. IV)
-    @Column(name = "epis_list")
-    private String episcopalJonesList;
-
-    //reference and commentary for juridical status
-    @Column(name = "status_ref")
-    private String statusReference;
-
-    //juridical status of settlement in 2nd c. CE
-    @Column(name="status")
-    private String status;
-
-    //constructor
-    public Settlement (Integer pleiadesId, String name, Point geom, String province,String conventus, String plinyList, String straboList, String ptolemyList, String episcopalJonesList, String statusReference, String status){
-        this.pleiadesId = pleiadesId;
-        this.name = name;
-        this.geom = geom;
-        this.province = province;
-        this.conventus = conventus;
-        this.plinyList = plinyList;
-        this.straboList = straboList;
-        this.ptolemyList = ptolemyList;
-        this.episcopalJonesList = episcopalJonesList;
-        this.statusReference = statusReference;
-        this.status = status;
-    }
+//    @OneToMany
+//    @JoinColumn(name="anc_ref_id")
+//    private List<AncientReference> ancientReferenceList = new ArrayList<>();
+//
+//    @OneToMany
+//    @JoinColumn(name="mod_ref_id")
+//    private List<ModernReference> modernReferenceList = new ArrayList<>();
 }

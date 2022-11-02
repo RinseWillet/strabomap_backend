@@ -4,17 +4,14 @@ package com.archaeologyprojects.strabomap.geojson;
 import org.springframework.stereotype.Service;
 
 //JSON
-import org.json.JSONObject;
-import org.json.JSONArray;
+import org.json.*;
 
 //Logging
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 //Java
 import java.lang.reflect.Field;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 //project components
 import com.archaeologyprojects.strabomap.settlement.Settlement;
@@ -27,7 +24,7 @@ public class GeoJsonService {
     private final Logger logger = LoggerFactory.getLogger(GeoJsonService.class);
 
     //method to convert points to geojson
-    public JSONObject convert(Iterable<Settlement> iterable) {
+    public JSONObject convert(Iterable<Settlement> settlementIterable) {
 
         //main object in which all features are stored, object in which projection (crs) information is stored, object
         //in which projection properties are stored;
@@ -48,7 +45,7 @@ public class GeoJsonService {
         crs.put("properties", crsProperties);
 
         //converting incoming Iterable to Iterator
-        Iterator<Settlement> settlementIterator = iterable.iterator();
+        Iterator<Settlement> settlementIterator = settlementIterable.iterator();
 
         //JSONArray to store all features
         JSONArray jsonArray = new JSONArray();
@@ -99,16 +96,7 @@ public class GeoJsonService {
         setLinkedHashMap(geometry);
 
         //constructing properties
-        properties.put("name", settlement.getName());
-        properties.put("province", settlement.getProvince());
-        properties.put("status", settlement.getStatus());
-        properties.put("conventus", settlement.getConventus());
-        properties.put("statusref", settlement.getStatusReference());
-        properties.put("plinref", settlement.getPlinyList());
-        properties.put("strabref", settlement.getStraboList());
-        properties.put("ptolref", settlement.getPtolemyList());
-        properties.put("episref", settlement.getEpiscopalJonesList());
-        properties.put("plid", settlement.getPleiadesId());
+        properties.put("name", settlement.getAncientName());
 
         //constructing geometry
         geometry.put("type", settlement.getGeom().getGeometryType());
