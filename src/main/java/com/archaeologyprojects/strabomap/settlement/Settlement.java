@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 //Package components
 import com.archaeologyprojects.strabomap.ancientreference.AncientReference;
@@ -35,6 +36,9 @@ public class Settlement {
     private String modernName;
 
     private Point geom;
+
+    @OneToMany(mappedBy = "settlement")
+    private Set<AncientReference> ancientReferenceSet;
 
 //    @OneToMany
 //    @JoinColumn(name="anc_ref_id")

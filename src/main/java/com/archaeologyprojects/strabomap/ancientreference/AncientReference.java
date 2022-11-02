@@ -1,9 +1,11 @@
 package com.archaeologyprojects.strabomap.ancientreference;
 
+import com.archaeologyprojects.strabomap.settlement.Settlement;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name= "ancref")
+@Table(name = "ancrefs")
 public class AncientReference {
 
     @Id
@@ -15,4 +17,6 @@ public class AncientReference {
     private String author;
     private String title;
     private String reference;
+
+    private Settlement settlement;
 }

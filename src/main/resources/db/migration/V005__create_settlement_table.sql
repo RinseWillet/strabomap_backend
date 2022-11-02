@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS settlement (
+CREATE TABLE IF NOT EXISTS settlements (
     id SERIAL PRIMARY KEY,
     pleiadesid INT,
     ancientname VARCHAR(255) NOT NULL,
