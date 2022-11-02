@@ -18,5 +18,7 @@ public class AncientReference {
     private String title;
     private String reference;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="settlement_id", nullable = false)
     private Settlement settlement;
 }

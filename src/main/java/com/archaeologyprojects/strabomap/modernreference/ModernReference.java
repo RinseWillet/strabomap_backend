@@ -1,5 +1,6 @@
 package com.archaeologyprojects.strabomap.modernreference;
 
+import com.archaeologyprojects.strabomap.settlement.Settlement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,8 @@ public class ModernReference {
     private Integer pubYear;
     private String title;
     private String pageNumbers;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "settlement_id")
+    private Settlement settlement;
 }

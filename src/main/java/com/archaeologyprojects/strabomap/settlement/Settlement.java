@@ -22,7 +22,7 @@ import com.archaeologyprojects.strabomap.modernreference.ModernReference;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "settlement")
+@Table(name = "settlements")
 public class Settlement {
 
     @Id
@@ -36,15 +36,4 @@ public class Settlement {
     private String modernName;
 
     private Point geom;
-
-    @OneToMany(mappedBy = "settlement")
-    private Set<AncientReference> ancientReferenceSet;
-
-//    @OneToMany
-//    @JoinColumn(name="anc_ref_id")
-//    private List<AncientReference> ancientReferenceList = new ArrayList<>();
-//
-//    @OneToMany
-//    @JoinColumn(name="mod_ref_id")
-//    private List<ModernReference> modernReferenceList = new ArrayList<>();
 }
