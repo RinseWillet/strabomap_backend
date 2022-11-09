@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "modrefs")
-public class ModernReference {
+@Table(name = "modref")
+public class ModernReference{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,10 @@ public class ModernReference {
     private String title;
     private String pageNumbers;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "settlement_id")
+    @ManyToOne
+    @JoinColumn (name = "settlement_id", nullable=false)
     private Settlement settlement;
+
+    @Column(name = "lastmodified", columnDefinition = "TIMESTAMP")
+    private LocalDateTime lastModified;
 }

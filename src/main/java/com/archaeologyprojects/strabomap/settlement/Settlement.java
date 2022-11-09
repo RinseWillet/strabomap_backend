@@ -9,6 +9,7 @@ import org.locationtech.jts.geom.Point;
 //Java
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,7 @@ import com.archaeologyprojects.strabomap.modernreference.ModernReference;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "settlements")
+@Table(name = "settlement")
 public class Settlement {
 
     @Id
@@ -30,10 +31,16 @@ public class Settlement {
     private long id;
 
     private Integer pleiadesId;
-
     private String ancientName;
-
     private String modernName;
-
     private Point geom;
+
+    @OneToMany(mappedBy = "settlement")
+    private List<AncientReference> ancientReferences;
+
+    @OneToMany(mappedBy = "settlement")
+    private List<ModernReference> modernReferences;
+
+    @Column(name = "lastmodified", columnDefinition = "TIMESTAMP")
+    private LocalDateTime lastModified;
 }
