@@ -1,6 +1,7 @@
 package com.archaeologyprojects.strabomap.modernreference;
 
 import com.archaeologyprojects.strabomap.settlement.Settlement;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

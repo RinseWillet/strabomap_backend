@@ -35,10 +35,12 @@ public class Settlement {
     private String modernName;
     private Point geom;
 
-    @OneToMany(mappedBy = "settlement")
+    @OneToMany
+    @JoinColumn(name="ancref_id")
     private List<AncientReference> ancientReferences;
 
-    @OneToMany(mappedBy = "settlement")
+    @OneToMany
+    @JoinColumn(name="modref_id")
     private List<ModernReference> modernReferences;
 
     @Column(name = "lastmodified", columnDefinition = "TIMESTAMP")

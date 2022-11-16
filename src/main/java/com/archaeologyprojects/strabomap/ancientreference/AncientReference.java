@@ -1,11 +1,14 @@
 package com.archaeologyprojects.strabomap.ancientreference;
 
 import com.archaeologyprojects.strabomap.settlement.Settlement;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "ancref")
 public class AncientReference {
 
@@ -26,8 +29,4 @@ public class AncientReference {
 
     @Column(name = "lastmodified", columnDefinition = "TIMESTAMP")
     private LocalDateTime lastModified;
-
-    public enum TypeWork {
-        EPIGRAPHY, NUMISMATIC, TEXT, DEPICTION
-    }
 }
