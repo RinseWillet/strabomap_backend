@@ -2,10 +2,9 @@ package com.archaeologyprojects.strabomap.ancientreference;
 
 import com.sun.xml.bind.annotation.XmlIsSet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -46,4 +45,17 @@ public class AncientReferenceController {
     public Iterable<AncientReference> findByTitle(@PathVariable("title") String title){
         return ancientReferenceService.findByTitle(title);
     }
+
+    @PostMapping("/new/{id}")
+    public AncientReference addAncientReference(@RequestBody AncientReference ancientReference, @PathVariable("id") long id){
+        try {
+            return ancientReferenceService.addAncientReference(ancientReference, id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Settlement not found"
+            );
+        }
+    }
+
+
 }

@@ -4,6 +4,8 @@ package com.archaeologyprojects.strabomap.settlement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/settlements")
@@ -27,5 +29,15 @@ public class SettlementController {
     @GetMapping("/overviewmap")
     public Iterable<SettlementMapDTO> overviewMapping(){
         return settlementService.overviewMapping();
+    }
+
+    @PostMapping("/new")
+    public Settlement addSettlement (@RequestBody Settlement settlement) {
+            return settlementService.addSettlement(settlement);
+    }
+
+    @PutMapping("/update")
+    public Optional<Settlement> changeSettlement (@RequestBody Settlement settlement) {
+        return settlementService.changeSettlement(settlement);
     }
 }
